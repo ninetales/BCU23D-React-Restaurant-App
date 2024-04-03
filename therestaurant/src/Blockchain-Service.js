@@ -5,12 +5,21 @@ const provider = new ethers.providers.JsonRpcProvider(url);
 
 const contract = new ethers.Contract(adress, abi, provider);
 
+async function createRestaurant(name) {
+    try {
+        const tx = await contract.createRestaurant(name)
+        await tx.wait()
+    } catch (error) {
+        console.error('Could not create restaurant: ', error);
+    }
+}
+
 async function getBookingCount() {
     try {
         const count = await contract.bookingCount()
         return count
     } catch (error) {
-        console.error('Error getting number of bookings', error);
+        console.error('Error getting number of bookings: ', error);
     }
 }
 
@@ -20,6 +29,6 @@ async function getBooking(id) {
         return booking
         
     } catch (error) {
-        console.error('Could not get the booking', error);
+        console.error('Could not get the booking: ', error);
     }
 }
