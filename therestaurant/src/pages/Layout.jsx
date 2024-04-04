@@ -1,10 +1,9 @@
 import { Outlet } from 'react-router';
-import './../assets/styles/layout.scss';
 import { NavLink } from 'react-router-dom';
 
 export const Layout = () => {
   return (
-    <div className='wrapper'>
+    <div className="wrapper">
       <header>
         <nav>
           <ul>
