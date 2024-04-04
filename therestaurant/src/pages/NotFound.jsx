@@ -2,7 +2,7 @@
 const NotFound = () => {
   return (
     <div>
-      <p>ERROR 404, it's 404, yeah you know me!</p>
+      <p>ERROR 404</p>
     </div>
   );
 };
