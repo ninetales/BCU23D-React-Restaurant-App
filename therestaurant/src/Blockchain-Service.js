@@ -32,3 +32,33 @@ async function getBooking(id) {
         console.error('Could not get the booking: ', error);
     }
 }
+
+async function createBooking(numberOfGuests, name, date, time, restaurantId) {
+    try {
+      const tx = await contract.createBooking(numberOfGuests, name, date, time, restaurantId);
+      await tx.wait();
+      console.log('Booking Created: ', name);
+    } catch (error) {
+      console.error('Error creating booking: ', error);
+    }
+  }
+
+  async function removeBooking(id) {
+    try {
+      const tx = await contract.removeBooking(id);
+      await tx.wait();
+      console.log('Booking with id ', id, ' has been removed.');
+    } catch (error) {
+      console.error('Could not remove booking: ', error);
+    }
+  }
+
+  async function updateBooking(id, numberOfGuests, name, date, time) {
+    try {
+      const tx = await contract.editBooking(id, numberOfGuests, name, date, time);
+      await tx.wait();
+      console.log('Booking with id ', id, 'has been updated');
+    } catch (error) {
+      console.error('Could not update booking: ', error);
+    }
+  }
