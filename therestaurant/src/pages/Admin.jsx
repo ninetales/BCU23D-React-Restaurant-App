@@ -33,11 +33,13 @@ const Admin = () => {
       </button>
       <button
         onClick={async () => {
+          let allBookings = [];
           const count = await getBookingCount();
           const decimal = parseInt(count._hex);
           for (let i = 1; i < decimal + 1; i++) {
-            console.log(await getBooking(i));
+            allBookings.push(await getBooking(i));
           }
+          console.log(allBookings);
         }}
       >
         Get All Bookings
