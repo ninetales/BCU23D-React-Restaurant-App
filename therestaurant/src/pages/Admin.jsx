@@ -5,7 +5,9 @@ import {
   createBooking,
   getBookingCount,
   getBooking,
+  getBookings,
 } from '../Blockchain-Service';
+import { faChampagneGlasses } from '@fortawesome/free-solid-svg-icons';
 
 const Admin = () => {
   const { isAdmin } = useContext(AdminContext);
@@ -17,7 +19,7 @@ const Admin = () => {
       </button>
       <button
         onClick={async () =>
-          await createBooking(2, 'Dalle', '20240405', 1900, 10)
+          await createBooking(2, 'Dalle', '20240405', 1900, 1)
         }
       >
         Create Booking
@@ -43,6 +45,14 @@ const Admin = () => {
         }}
       >
         Get All Bookings
+      </button>
+      <button
+        onClick={async () => {
+          const bookings = await getBookings(1);
+          console.log(bookings);
+        }}
+      >
+        Get Bookings By RestaurantId
       </button>
     </div>
   );

@@ -26,6 +26,15 @@ async function getBookingCount() {
   }
 }
 
+async function getBookings(restaurantId) {
+  try {
+    const bookings = await contract.getBookings(restaurantId);
+    return bookings;
+  } catch (error) {
+    console.error('Error getting number of bookings: ', error);
+  }
+}
+
 async function getBooking(id) {
   try {
     const booking = await contract.bookings(id);
@@ -71,4 +80,10 @@ async function updateBooking(id, numberOfGuests, name, date, time) {
   }
 }
 
-export { createRestaurant, createBooking, getBookingCount, getBooking };
+export {
+  createRestaurant,
+  createBooking,
+  getBookingCount,
+  getBooking,
+  getBookings,
+};
