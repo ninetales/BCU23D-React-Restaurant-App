@@ -1,0 +1,130 @@
+.booking-app {
+    border: 1px solid #eee;
+    background-color: #fbfbfb;
+    padding: 20px;
+    max-width: 500px;
+
+    .booking-form {
+        display: grid;
+        grid-gap: 20px;
+
+        input {
+            height: 40px;
+            padding: 0 10px;
+        }
+
+        &__people {
+            border: 1px solid #eee;
+            padding: 20px;
+            background-color: #fff;
+            // box-shadow: 0px 1px 14px -10px #909090;
+
+            label {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+
+                select {
+                    height: 40px;
+                    padding: 0 10px;
+                }
+            }
+        }
+
+        &__tables {
+            border: 1px solid #eee;
+            padding: 20px;
+            background-color: #fff;
+            display: grid;
+            gap: 10px;
+
+            h3 {
+                border: 1px solid #eee;
+                text-align: center;
+                background-color: #f6f6f6;
+                padding: 20px;
+                margin: 0;
+                background-color: #ffffff;
+                opacity: 0.8;
+                background-size: 10px 10px;
+                background-image: repeating-linear-gradient(45deg, #e2f0ff 0, #e2f0ff 1px, #ffffff 0, #ffffff 50%);
+            }
+        }
+
+        &__contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+            border: 1px solid #eee;
+            background-color: #fff;
+
+            label {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .policy-info {
+                font-size: .9rem;
+                color: #666;
+                text-align: center;
+            }
+        }
+
+
+
+        &__time {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+
+            input[type="radio"] {
+                display: none;
+
+                &:checked+span {
+                    box-shadow: inset 0 0px 0px 3px #008cff;
+                    background-color: #eff4ff;
+                }
+            }
+
+            label span {
+                display: flex;
+                height: 60px;
+                justify-content: center;
+                align-items: center;
+                // border-radius: .7rem;
+                background-color: #fbfbfb;
+                cursor: pointer;
+                box-shadow: inset 0 0px 0px 3px #ededed;
+                transition: all .2s ease;
+
+                &:hover {
+                    background-color: #efefef;
+                    box-shadow: inset 0 0px 0px 3px #d5d5d5;
+                }
+            }
+
+        }
+
+        &__action-con {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+
+            button {
+                height: 60px;
+                padding: 0;
+                border: none;
+                cursor: pointer;
+
+                &.save {
+                    background-color: #008cff;
+                    color: #fff;
+                }
+            }
+        }
+
+    }
+
+}
