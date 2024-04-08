@@ -5,6 +5,7 @@ import Booking from './pages/Booking';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 import Admin from './pages/Admin';
+import UpdateBooking from './pages/UpdateBooking';
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ export const router = createBrowserRouter([
       { path: '/contact', element: <Contact /> },
       { path: '/booking', element: <Booking /> },
       { path: '/admin', element: <Admin /> },
+      {
+        path: '/admin/:id',
+        element: <UpdateBooking />,
+      },
     ],
   },
 ]);

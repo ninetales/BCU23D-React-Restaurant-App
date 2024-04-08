@@ -7,7 +7,6 @@ import {
   getBooking,
   getBookings,
 } from '../Blockchain-Service';
-import { faChampagneGlasses } from '@fortawesome/free-solid-svg-icons';
 
 const Admin = () => {
   const { isAdmin } = useContext(AdminContext);
