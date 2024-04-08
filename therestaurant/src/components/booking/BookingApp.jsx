@@ -1,12 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { ethers } from 'ethers';
 import { CalendarApp } from '../calendar/CalendarApp';
-import { dummyData } from './dummyData';
 import { timeToUnixConverter } from '../../utils/converter';
 import {
-  createRestaurant,
   createBooking,
-  getBookingCount,
   getBooking,
   getBookings,
 } from '../../Blockchain-Service';
@@ -149,12 +145,6 @@ export const BookingApp = () => {
       return true;
     }
   };
-
-  // const timeToUnixConverter = (hours, minutes) => {
-  //   const date = new Date();
-  //   date.setHours(hours, minutes, 0, 0);
-  //   return Math.floor(date.getTime() / 1000);
-  // };
 
   const stillBookable = (time) => {
     const date = new Date();
