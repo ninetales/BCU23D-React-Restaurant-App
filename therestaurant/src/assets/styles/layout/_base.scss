@@ -1,6 +1,19 @@
+@use '../abstract/variables';
+
 html,
 body {
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+#root {
+    height: 100%;
+}
+
+.container {
+    max-width: variables.$pageWidthDesk;
+    padding: 0 20px;
+    margin-right: auto;
+    margin-left: auto;
 }
