@@ -1,9 +1,19 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { ethers } from 'ethers';
 import { CalendarApp } from '../calendar/CalendarApp';
 import { dummyData } from './dummyData';
+import { timeToUnixConverter } from '../../utils/converter';
+import {
+  createRestaurant,
+  createBooking,
+  getBookingCount,
+  getBooking,
+  getBookings,
+} from '../../Blockchain-Service';
 
 export const BookingApp = () => {
   const formRef = useRef(null);
+  const tempRestaurantId = 1;
   const currentDate = new Date(
     Date.UTC(
       new Date().getFullYear(),
@@ -15,7 +25,7 @@ export const BookingApp = () => {
     .slice(0, 10);
 
   const initialFormData = {
-    restaurantId: null,
+    restaurantId: tempRestaurantId,
     numberOfGuests: null,
     date: currentDate,
     time: null,
@@ -35,8 +45,6 @@ export const BookingApp = () => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    console.log('handling', name, value);
-
     const valueHandler = !isNaN(value) ? parseFloat(value) : value;
 
     setFormData({
@@ -56,11 +64,18 @@ export const BookingApp = () => {
     });
   };
 
-  const listTables = () => {
-    // ====================================================
-    // await the booking data here <--
-    const data = dummyData; //  <-- replace
-    // =====================================================
+  const listTables = async () => {
+    const bookingReferences = await getBookings(tempRestaurantId);
+    const data = [];
+    for (let i = 0; i < bookingReferences.length; i++) {
+      const bookingId = parseInt(bookingReferences[i]._hex, 16);
+      const booking = await getBooking(bookingId);
+
+      data.push({
+        date: booking.date,
+        time: parseInt(booking.time._hex, 16),
+      });
+    }
 
     const bookedTablesCounter = new Map();
     bookedTablesCounter.set('tables', { 18: 0, 21: 0 });
@@ -76,9 +91,6 @@ export const BookingApp = () => {
     });
 
     setBookedTables(bookedTablesCounter);
-
-    console.log('checking tables count at 18', bookedTables.get('tables')[18]);
-    console.log('checking tables count at 21', bookedTables.get('tables')[21]);
   };
 
   const resetForm = () => {
@@ -87,9 +99,17 @@ export const BookingApp = () => {
     formRef.current.querySelector('select').selectedIndex = 0;
   };
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
     if (formValidator()) {
       resetForm();
+
+      await createBooking(
+        formData.numberOfGuests,
+        formData.name,
+        formData.date,
+        formData.time,
+        formData.restaurantId
+      );
       alert('form summited!');
     } else {
       alert('Missing data, check form!');
@@ -109,7 +129,7 @@ export const BookingApp = () => {
         const inputElement = formRef.current.querySelector(
           `[name="${property}"]`
         );
-        if (inputElement) {
+        if (inputElement !== null) {
           const parentElement = inputElement.parentNode;
 
           const messageElement = document.createElement('span');
@@ -130,11 +150,11 @@ export const BookingApp = () => {
     }
   };
 
-  const timeToUnixConverter = (hours, minutes) => {
-    const date = new Date();
-    date.setHours(hours, minutes, 0, 0);
-    return Math.floor(date.getTime() / 1000);
-  };
+  // const timeToUnixConverter = (hours, minutes) => {
+  //   const date = new Date();
+  //   date.setHours(hours, minutes, 0, 0);
+  //   return Math.floor(date.getTime() / 1000);
+  // };
 
   const stillBookable = (time) => {
     const date = new Date();
@@ -154,7 +174,6 @@ export const BookingApp = () => {
 
   return (
     <div className="booking-app">
-      {console.log('the form data', formData)}
       <h3>Make a reservation</h3>
       <form action="" className="booking-form" ref={formRef}>
         <div className="booking-form__people">
@@ -165,8 +184,9 @@ export const BookingApp = () => {
               id=""
               required
               onChange={handleInputChange}
+              defaultValue="0"
             >
-              <option value="" selected disabled>
+              <option value="0" disabled>
                 Select amount
               </option>
               <option value="1">1</option>
@@ -245,7 +265,7 @@ export const BookingApp = () => {
             <label>
               <span>Phone</span>
               <input
-                type="tel"
+                type="text"
                 name="phone"
                 required
                 onChange={handleInputChange}
