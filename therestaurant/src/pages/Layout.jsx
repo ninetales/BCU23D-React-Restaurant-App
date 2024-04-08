@@ -1,7 +1,12 @@
 import { Outlet } from 'react-router';
 import { NavLink } from 'react-router-dom';
+import { AdminContext } from '../contexts/AdminContext';
+import { useContext } from 'react';
+import ToggleAdmin from '../components/ToggleAdmin';
 
 export const Layout = () => {
+  const { isAdmin } = useContext(AdminContext);
+  console.log(isAdmin);
   return (
     <div className="wrapper">
       <header>
@@ -16,8 +21,16 @@ export const Layout = () => {
             <li>
               <NavLink to={'/contact'}>Contact</NavLink>
             </li>
+            {isAdmin ? (
+              <li>
+                <NavLink to={'/admin'}>Admin</NavLink>
+              </li>
+            ) : (
+              false
+            )}
           </ul>
         </nav>
+        <ToggleAdmin />
       </header>
       <main>
         <Outlet />
