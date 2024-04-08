@@ -1,5 +1,4 @@
 import { Outlet } from 'react-router';
-import './../assets/styles/layout.scss';
 import { NavLink } from 'react-router-dom';
 import { AdminContext } from '../contexts/AdminContext';
 import { useContext } from 'react';
@@ -9,7 +8,7 @@ export const Layout = () => {
   const { isAdmin } = useContext(AdminContext);
   console.log(isAdmin);
   return (
-    <div className='wrapper'>
+    <div className="wrapper">
       <header>
         <nav>
           <ul>
