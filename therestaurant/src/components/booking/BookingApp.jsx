@@ -46,9 +46,13 @@ export const BookingApp = () => {
   };
 
   const checkAvailability = (date) => {
+    formRef.current
+      .querySelectorAll('input[name="time"]')
+      .forEach((radioButton) => (radioButton.checked = false));
     setFormData({
       ...formData,
       ['date']: date,
+      ['time']: null,
     });
   };
 
@@ -84,8 +88,46 @@ export const BookingApp = () => {
   };
 
   const submitHandler = () => {
-    resetForm();
-    alert('form summited!');
+    if (formValidator()) {
+      resetForm();
+      alert('form summited!');
+    } else {
+      alert('Missing data, check form!');
+    }
+  };
+
+  const formValidator = () => {
+    let errorCounter = 0;
+
+    // Remove any previous messages
+    formRef.current.querySelectorAll('.input-message').forEach((message) => {
+      message.remove();
+    });
+
+    for (const property in formData) {
+      if (!formData[property] && property !== 'restaurantId') {
+        const inputElement = formRef.current.querySelector(
+          `[name="${property}"]`
+        );
+        if (inputElement) {
+          const parentElement = inputElement.parentNode;
+
+          const messageElement = document.createElement('span');
+          messageElement.classList.add('input-message');
+          messageElement.textContent = 'This field cannot be empty';
+
+          parentElement.insertBefore(messageElement, inputElement.nextSibling);
+
+          errorCounter++;
+        }
+      }
+    }
+
+    if (errorCounter > 0) {
+      return false;
+    } else {
+      return true;
+    }
   };
 
   const timeToUnixConverter = (hours, minutes) => {
@@ -108,7 +150,6 @@ export const BookingApp = () => {
     } else {
       return false;
     }
-    // write a function that checks the current time and current date, return false/true etc
   };
 
   return (
