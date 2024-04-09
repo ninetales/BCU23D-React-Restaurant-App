@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState, useRef } from 'react';
 import { CalendarApp } from '../calendar/CalendarApp';
 import { timeToUnixConverter } from '../../utils/converter';
@@ -5,11 +6,14 @@ import {
   createBooking,
   getBooking,
   getBookings,
+  updateBookingBlock,
 } from '../../Blockchain-Service';
 
-export const BookingApp = () => {
+export const BookingApp = ({ updateBooking }) => {
+  console.log(updateBooking);
   const formRef = useRef(null);
   const tempRestaurantId = 1;
+
   const currentDate = new Date(
     Date.UTC(
       new Date().getFullYear(),
@@ -20,7 +24,7 @@ export const BookingApp = () => {
     .toISOString()
     .slice(0, 10);
 
-  const initialFormData = {
+  const [initialFormData, setinitialFormData] = useState({
     restaurantId: tempRestaurantId,
     numberOfGuests: null,
     date: currentDate,
@@ -28,7 +32,24 @@ export const BookingApp = () => {
     name: '',
     email: '',
     phone: null,
-  };
+  });
+
+  useEffect(() => {
+    setinitialFormData({
+      restaurantId: tempRestaurantId,
+      numberOfGuests: updateBooking
+        ? parseInt(updateBooking.numberOfGuests, 16)
+        : null,
+      date: updateBooking ? updateBooking.date : currentDate,
+      time: updateBooking ? parseInt(updateBooking.time, 16) : null,
+      name: updateBooking ? updateBooking.name : '',
+      email: '',
+      phone: null,
+    });
+    setFormData(initialFormData);
+    console.log(initialFormData.numberOfGuests);
+    console.log(parseInt(initialFormData.time, 16));
+  }, [updateBooking, currentDate]);
 
   const [bookedTables, setBookedTables] = useState(
     new Map([['tables', { 18: 0, 21: 0 }]])
@@ -97,16 +118,27 @@ export const BookingApp = () => {
 
   const submitHandler = async () => {
     if (formValidator()) {
-      resetForm();
-
-      await createBooking(
-        formData.numberOfGuests,
-        formData.name,
-        formData.date,
-        formData.time,
-        formData.restaurantId
-      );
-      alert('form summited!');
+      if (updateBooking) {
+        await updateBookingBlock(
+          parseInt(updateBooking.id._hex, 16),
+          formData.numberOfGuests,
+          formData.name,
+          formData.date,
+          formData.time
+        );
+        setinitialFormData(formData);
+        alert('Booking changed');
+      } else {
+        resetForm();
+        await createBooking(
+          formData.numberOfGuests,
+          formData.name,
+          formData.date,
+          formData.time,
+          formData.restaurantId
+        );
+        alert('form submited!');
+      }
     } else {
       alert('Missing data, check form!');
     }
@@ -163,28 +195,44 @@ export const BookingApp = () => {
   };
 
   return (
-    <div className="booking-app">
-      <h3>Make a reservation</h3>
-      <form action="" className="booking-form" ref={formRef}>
-        <div className="booking-form__people">
+    <div className='booking-app'>
+      {updateBooking ? (
+        <h3>
+          Change booking with id{' '}
+          {updateBooking.id ? parseInt(updateBooking.id._hex, 16) : null}
+        </h3>
+      ) : (
+        <h3>Make a reservation</h3>
+      )}
+      <form
+        action=''
+        className='booking-form'
+        ref={formRef}
+      >
+        <div className='booking-form__people'>
           <label>
             <span>Amount of people</span>
             <select
-              name="numberOfGuests"
-              id=""
+              name='numberOfGuests'
+              id=''
               required
               onChange={handleInputChange}
-              defaultValue="0"
+              defaultValue={
+                updateBooking ? (updateBooking.numberOfGuests ? '4' : '0') : '0'
+              }
             >
-              <option value="0" disabled>
+              <option
+                value='0'
+                disabled
+              >
                 Select amount
               </option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
+              <option value='1'>1</option>
+              <option value='2'>2</option>
+              <option value='3'>3</option>
+              <option value='4'>4</option>
+              <option value='5'>5</option>
+              <option value='6'>6</option>
             </select>
           </label>
         </div>
@@ -193,22 +241,22 @@ export const BookingApp = () => {
           <>
             <CalendarApp checkAvailability={checkAvailability} />
 
-            <div className="booking-form__tables">
+            <div className='booking-form__tables'>
               <h3>Date selected: {formData.date}</h3>
               <span>Select time:</span>
               {bookedTables.get('tables')[18] === 15 &&
                 bookedTables.get('tables')[21] === 15 && (
-                  <div className="notice notice--warning">
+                  <div className='notice notice--warning'>
                     <span>No available tables</span>
                   </div>
                 )}
-              <div className="booking-form__time">
+              <div className='booking-form__time'>
                 {bookedTables.get('tables')[18] < 15 &&
                   stillBookable(timeToUnixConverter(18, 0)) && (
                     <label>
                       <input
-                        type="radio"
-                        name="time"
+                        type='radio'
+                        name='time'
                         value={timeToUnixConverter(18, 0)}
                         onChange={handleInputChange}
                       />
@@ -219,8 +267,8 @@ export const BookingApp = () => {
                   stillBookable(timeToUnixConverter(21, 0)) && (
                     <label>
                       <input
-                        type="radio"
-                        name="time"
+                        type='radio'
+                        name='time'
                         value={timeToUnixConverter(21, 0)}
                         onChange={handleInputChange}
                       />
@@ -233,12 +281,13 @@ export const BookingApp = () => {
         )}
 
         {formData.time && (
-          <div className="booking-form__contact-details">
+          <div className='booking-form__contact-details'>
             <label>
               <span>Name</span>
               <input
-                type="text"
-                name="name"
+                type='text'
+                name='name'
+                value={formData.name}
                 required
                 onChange={handleInputChange}
               />
@@ -246,8 +295,8 @@ export const BookingApp = () => {
             <label>
               <span>Email</span>
               <input
-                type="email"
-                name="email"
+                type='email'
+                name='email'
                 required
                 onChange={handleInputChange}
               />
@@ -255,16 +304,16 @@ export const BookingApp = () => {
             <label>
               <span>Phone</span>
               <input
-                type="text"
-                name="phone"
+                type='text'
+                name='phone'
                 required
                 onChange={handleInputChange}
               />
             </label>
 
-            <div className="booking-form__action-con">
+            <div className='booking-form__action-con'>
               <button
-                className="save"
+                className='save'
                 onClick={(e) => {
                   e.preventDefault();
                   submitHandler();
@@ -281,7 +330,7 @@ export const BookingApp = () => {
               </button>
             </div>
 
-            <div className="policy-info">
+            <div className='policy-info'>
               <p>
                 By submitting this form, you consent to the processing of your
                 personal data in accordance with our Privacy Policy and GDPR
