@@ -37,7 +37,7 @@ export const BookingApp = ({ updateBooking }) => {
     setinitialFormData({
       restaurantId: tempRestaurantId,
       numberOfGuests: updateBooking
-        ? parseInt(updateBooking.numberOfGuests, 16)
+        ? parseInt(updateBooking.numberOfGuests)
         : null,
       date: updateBooking ? updateBooking.date : currentDate,
 time: updateBooking ? parseInt(updateBooking.time) : null,
