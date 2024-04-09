@@ -10,7 +10,6 @@ import {
 } from '../../Blockchain-Service';
 
 export const BookingApp = ({ updateBooking }) => {
-  console.log(updateBooking);
   const formRef = useRef(null);
   const tempRestaurantId = 1;
 
@@ -47,8 +46,6 @@ export const BookingApp = ({ updateBooking }) => {
       phone: null,
     });
     setFormData(initialFormData);
-    console.log(initialFormData.numberOfGuests);
-    console.log(parseInt(initialFormData.time, 16));
   }, [updateBooking, currentDate]);
 
   const [bookedTables, setBookedTables] = useState(
