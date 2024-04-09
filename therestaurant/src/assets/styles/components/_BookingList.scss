@@ -1,0 +1,17 @@
+.booking-list {
+
+    .booking-div {
+        border-bottom: 1px solid grey;
+        padding: 1em;
+    }
+
+      .booking-div {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+      }
+      
+      .bookings-header {
+        font-weight: bold;
+      }
+    
+}
