@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AdminContext } from '../contexts/AdminContext';
 import {
   createRestaurant,
@@ -8,8 +8,11 @@ import {
   getBookings,
 } from '../Blockchain-Service';
 import { faChampagneGlasses } from '@fortawesome/free-solid-svg-icons';
+import BookingList from "../components/BookingList";
 
 const Admin = () => {
+  const [showBookingList, setShowBookingList] = useState(false);
+  const [bookingsData, setbookingsData] = useState("");
   const { isAdmin } = useContext(AdminContext);
   if (!isAdmin)
     return (
@@ -19,7 +22,9 @@ const Admin = () => {
     );
   return (
     <div>
+      <div>
       <h1>Admin</h1>
+
       <button onClick={async () => await createRestaurant('Test')}>
         Create Restaurant
       </button>
@@ -47,6 +52,8 @@ const Admin = () => {
           for (let i = 1; i < decimal + 1; i++) {
             allBookings.push(await getBooking(i));
           }
+          setShowBookingList(true)
+          setbookingsData(allBookings)
           console.log(allBookings);
         }}
       >
@@ -60,6 +67,10 @@ const Admin = () => {
       >
         Get Bookings By RestaurantId
       </button>
+      </div>
+      <div>
+      {showBookingList && <BookingList data={bookingsData}/>}
+      </div>
     </div>
   );
 };
