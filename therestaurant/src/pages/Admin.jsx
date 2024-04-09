@@ -14,10 +14,17 @@ const Admin = () => {
   const [showBookingList, setShowBookingList] = useState(false);
   const [bookingsData, setbookingsData] = useState("");
   const { isAdmin } = useContext(AdminContext);
-  if (!isAdmin) return "You don't have permission to view this page";
+  if (!isAdmin)
+    return (
+      <span className="notice notice--warning">
+        You don't have permission to view this page
+      </span>
+    );
   return (
     <div>
       <div>
+      <h1>Admin</h1>
+
       <button onClick={async () => await createRestaurant('Test')}>
         Create Restaurant
       </button>

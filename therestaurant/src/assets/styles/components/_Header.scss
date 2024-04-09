@@ -1,0 +1,88 @@
+@use '../abstract/variables';
+@use '../abstract/colors';
+@use '../abstract/typography';
+
+
+header {
+    margin-bottom: variables.$headerBottomSpacing;
+
+    .banner {
+        display: flex;
+        justify-content: center;
+        background-color: #ffffff;
+        opacity: 0.8;
+        background-image: radial-gradient(#45a6f7 0.5px, transparent 0.5px), radial-gradient(#45a6f7 0.5px, #ffffff 0.5px);
+        background-size: 20px 20px;
+        background-position: 0 0, 10px 10px;
+
+        .logo-con {
+            margin-right: auto;
+            margin-left: auto;
+
+            img {
+                width: 100%;
+                max-width: 150px;
+            }
+        }
+    }
+
+    .navBar {
+        background-color: colors.$primaryColor;
+        background-image: linear-gradient(to right top, #1865ac, #0e6abc, #086ecc, #0c72dc, #1a75eb, #0f7ff2, #048af9, #0094ff, #00a6ff, #00b6ff, #37c5fe, #5fd3fb);
+        // background-color: #023486;
+        // opacity: 0.8;
+        // background: repeating-linear-gradient(45deg, #0753a0, #0753a0 5px, #023486 5px, #023486 25px);
+
+        // background-color: #023486;
+        // opacity: 0.8;
+        // background: repeating-linear-gradient(45deg, #0a3d8d, #0a3d8d 4.5px, #023486 4.5px, #023486 22.5px);
+
+        // background: rgb(16, 132, 255);
+        // background: -moz-linear-gradient(0deg, rgba(16, 132, 255, 1) 0%, rgba(143, 234, 252, 1) 100%);
+        // background: -webkit-linear-gradient(0deg, rgba(16, 132, 255, 1) 0%, rgba(143, 234, 252, 1) 100%);
+        // background: linear-gradient(0deg, rgba(16, 132, 255, 1) 0%, rgba(143, 234, 252, 1) 100%);
+        // filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1084ff", endColorstr="#8feafc", GradientType=1);
+
+        ul {
+            height: variables.$navbarHeight;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 10px;
+
+            li {
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                a {
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-transform: uppercase;
+                    font-weight: bold;
+
+                    text-decoration: none;
+                    color: colors.$navBarLinkColor;
+                    font-size: typography.pxToRem(13);
+                    letter-spacing: 0.05rem;
+                    padding: 0 15px;
+
+                    &.active {
+                        // box-shadow: inset 0 -3px 0 0 #fff;
+                        // background-color: colors.$navBarLinkColorActive;
+                        background-color: rgba(67, 103, 187, 0.49);
+                        box-shadow: inset 0px 0px 8px 0px rgba(13, 86, 121, 0.47);
+                    }
+                }
+            }
+
+        }
+    }
+}
