@@ -10,12 +10,18 @@ const contract = new ethers.Contract(adress, abi, signer);
 async function createRestaurant(name) {
   try {
     const tx = await contract.createRestaurant(name);
-    await tx.wait();
-    console.log(tx);
+    const receipt = await tx.wait();
+
+    // Check if restaurant has been created
+    if (receipt.events[0].args[0]) {
+      return Number(receipt.events[0].args.id); // Return the ID
+    }
   } catch (error) {
     console.error('Could not create restaurant: ', error);
+    return null;
   }
 }
+
 
 async function getBookingCount() {
   try {
