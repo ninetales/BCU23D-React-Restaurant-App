@@ -1,5 +1,12 @@
+import { BookingApp } from '../components/booking/BookingApp';
+
 const Booking = () => {
-  return <div>Booking</div>;
+  return (
+    <>
+      <h1>Booking</h1>
+      <BookingApp />
+    </>
+  );
 };
 
 export default Booking;

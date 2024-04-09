@@ -1,0 +1,16 @@
+@use '../abstract/colors';
+
+.notice {
+    border: 1px solid;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--warning {
+        border-color: colors.$noticeWarningBorderColor;
+        background-color: colors.$noticeWarningBackgroundColor;
+        color: colors.$noticeWarningTextColor;
+    }
+
+}

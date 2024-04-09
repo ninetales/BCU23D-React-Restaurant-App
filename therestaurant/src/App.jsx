@@ -1,5 +1,6 @@
 import { RouterProvider } from 'react-router-dom';
 import { router } from './Router';
+import './assets/styles/style.css';
 import { AdminContext } from './contexts/AdminContext';
 import { useState, createContext } from 'react';
 

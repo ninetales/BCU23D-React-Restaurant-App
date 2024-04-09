@@ -1,0 +1,91 @@
+.calendar-app {
+    background-color: #fff;
+    border: 1px solid #eee;
+    max-width: 600px;
+
+    button {
+        cursor: pointer;
+    }
+
+    &__month {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        text-align: center;
+        height: 50px;
+
+        span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button {
+            border-radius: 0;
+            border: none;
+            width: 50px;
+        }
+    }
+
+    &__days {
+        border-top: 1px solid #eee;
+
+        li span {
+            color: #676767;
+        }
+    }
+
+    &__columns {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li {
+            border: 1px solid #eee;
+            border-top: 0;
+            border-left: 0;
+        }
+
+        li span,
+        li button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 40px;
+
+            i {
+                font-style: normal;
+            }
+
+            i.current-date {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #008cff;
+                color: #fff;
+                height: 25px;
+                min-width: 25px;
+                border-radius: 50px;
+            }
+        }
+
+        li button {
+            width: 100%;
+            cursor: pointer;
+            border-radius: 0;
+            border: none;
+            background-color: #fff;
+
+            &:hover {
+                background-color: #31a3ff;
+                color: #fff;
+            }
+        }
+    }
+
+    &__inactive {
+        background-color: #fafafa;
+        color: #bdb9b9;
+    }
+}
