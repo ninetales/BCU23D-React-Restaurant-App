@@ -1,9 +1,10 @@
 @use './abstract/typography';
 @use './abstract/colors';
+@use './abstract/variables';
 
 @use './layout/base';
-@use './layout/layout';
 
 @use './components/Calendar';
 @use './components/BookingApp';
 @use './components/Notice';
+@use './components/Header';
