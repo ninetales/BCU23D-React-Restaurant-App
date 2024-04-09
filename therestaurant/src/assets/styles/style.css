@@ -222,4 +222,16 @@ nav ul li a.active {
   border-color: #ddd690;
   background-color: #f9f4c4;
   color: #98712b;
+}
+
+.booking-list .booking-div {
+  border-bottom: 1px solid grey;
+  padding: 1em;
+}
+.booking-list .booking-div {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+.booking-list .bookings-header {
+  font-weight: bold;
 }/*# sourceMappingURL=style.css.map */

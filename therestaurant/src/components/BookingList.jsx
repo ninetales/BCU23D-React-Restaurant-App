@@ -1,8 +1,6 @@
 const BookingList = ({ data }) => {
   return (
     <div className="booking-list">
-      <h2>Booking List</h2>
-      <div className="bookings-grid">
       <div className="booking-div bookings-header">
           <p>Name</p>
           <p>Date</p>
@@ -23,7 +21,6 @@ const BookingList = ({ data }) => {
           <button id="update-btn">Update</button>
         </div>
       ))}
-      </div>
     </div>
   );
 };
