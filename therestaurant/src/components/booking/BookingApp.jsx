@@ -8,10 +8,11 @@ import {
   getBookings,
   updateBookingBlock,
 } from '../../Blockchain-Service';
+import { getRestaurantId } from '../../utils/initRestaurant';
 
 export const BookingApp = ({ updateBooking }) => {
   const formRef = useRef(null);
-  const tempRestaurantId = 1;
+  const tempRestaurantId = getRestaurantId();
 
   const currentDate = new Date(
     Date.UTC(
@@ -40,7 +41,7 @@ export const BookingApp = ({ updateBooking }) => {
         ? parseInt(updateBooking.numberOfGuests)
         : null,
       date: updateBooking ? updateBooking.date : currentDate,
-time: updateBooking ? parseInt(updateBooking.time) : null,
+      time: updateBooking ? parseInt(updateBooking.time) : null,
       name: updateBooking ? updateBooking.name : '',
       email: '',
       phone: null,
