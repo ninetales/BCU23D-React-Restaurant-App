@@ -37,10 +37,10 @@ export const BookingApp = ({ updateBooking }) => {
     setinitialFormData({
       restaurantId: tempRestaurantId,
       numberOfGuests: updateBooking
-        ? parseInt(updateBooking.numberOfGuests, 16)
+        ? parseInt(updateBooking.numberOfGuests)
         : null,
       date: updateBooking ? updateBooking.date : currentDate,
-      time: updateBooking ? parseInt(updateBooking.time, 16) : null,
+time: updateBooking ? parseInt(updateBooking.time) : null,
       name: updateBooking ? updateBooking.name : '',
       email: '',
       phone: null,
@@ -262,6 +262,10 @@ export const BookingApp = ({ updateBooking }) => {
                         name='time'
                         value={timeToUnixConverter(18, 0)}
                         onChange={handleInputChange}
+                        checked={
+                          formData.time === timeToUnixConverter(18, 0) &&
+                          'checked'
+                        }
                       />
                       <span>18:00</span>
                     </label>
@@ -274,6 +278,10 @@ export const BookingApp = ({ updateBooking }) => {
                         name='time'
                         value={timeToUnixConverter(21, 0)}
                         onChange={handleInputChange}
+                        checked={
+                          formData.time === timeToUnixConverter(21, 0) &&
+                          'checked'
+                        }
                       />
                       <span>21:00</span>
                     </label>
