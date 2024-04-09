@@ -40,7 +40,7 @@ export const BookingApp = ({ updateBooking }) => {
         ? parseInt(updateBooking.numberOfGuests, 16)
         : null,
       date: updateBooking ? updateBooking.date : currentDate,
-      time: updateBooking ? parseInt(updateBooking.time, 16) : null,
+time: updateBooking ? parseInt(updateBooking.time) : null,
       name: updateBooking ? updateBooking.name : '',
       email: '',
       phone: null,
