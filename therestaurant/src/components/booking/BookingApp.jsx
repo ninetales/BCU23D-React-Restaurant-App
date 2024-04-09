@@ -274,6 +274,10 @@ time: updateBooking ? parseInt(updateBooking.time) : null,
                         name='time'
                         value={timeToUnixConverter(21, 0)}
                         onChange={handleInputChange}
+                        checked={
+                          formData.time === timeToUnixConverter(21, 0) &&
+                          'checked'
+                        }
                       />
                       <span>21:00</span>
                     </label>
