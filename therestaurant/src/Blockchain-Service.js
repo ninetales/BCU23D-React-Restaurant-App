@@ -92,5 +92,6 @@ export {
   getBookingCount,
   getBooking,
   getBookings,
+  removeBooking,
   updateBooking as updateBookingBlock,
 };
