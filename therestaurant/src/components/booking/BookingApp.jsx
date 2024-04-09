@@ -59,7 +59,13 @@ export const BookingApp = ({ updateBooking }) => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    const valueHandler = !isNaN(value) ? parseFloat(value) : value;
+    let valueHandler;
+
+    if (value !== '' && !isNaN(value)) {
+      valueHandler = parseFloat(value);
+    } else {
+      valueHandler = value;
+    }
 
     setFormData({
       ...formData,
