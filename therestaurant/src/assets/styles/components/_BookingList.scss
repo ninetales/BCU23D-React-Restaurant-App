@@ -1,17 +1,29 @@
+@use '../abstract/colors';
+
 .booking-list {
 
-    .booking-div {
-        border-bottom: 1px solid grey;
-        padding: 1em;
-    }
+  .bookings-header {
+    font-weight: bold;
+    color: colors.$titleColor;
+    background-color: #f8fbff;
+  }
 
-      .booking-div {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-      }
-      
-      .bookings-header {
-        font-weight: bold;
-      }
-    
+  .booking-div {
+    border-bottom: 1px solid colors.$titleColor;
+    padding: 1em;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+
+    .delete-btn {}
+
+    .edit-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+    }
+  }
+
+
 }

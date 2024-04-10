@@ -1,0 +1,22 @@
+.loading-animation {
+    overflow: hidden;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: .8rem;
+
+    &__content {
+        max-width: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            width: 100px;
+            height: 100px;
+        }
+    }
+}

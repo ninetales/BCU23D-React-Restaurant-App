@@ -19,4 +19,10 @@
         color: colors.$noticeErrorTextColor;
     }
 
+    &--info {
+        border-color: colors.$noticeInfoBorderColor;
+        background-color: colors.$noticeInfoBackgroundColor;
+        color: colors.$noticeInfoTextColor;
+    }
+
 }
