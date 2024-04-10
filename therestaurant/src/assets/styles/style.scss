@@ -4,9 +4,14 @@
 
 @use './layout/base';
 
+@use './components/Forms';
+@use './components/Buttons';
+@use './components/Notice';
 @use './components/Calendar';
 @use './components/BookingApp';
-@use './components/Notice';
 @use './components/BookingList';
 @use './components/Header';
 @use './components/ContactForm';
+@use './components/LoadingAnimation';
+@use './components/Sidebar';
+@use './components/Hero';

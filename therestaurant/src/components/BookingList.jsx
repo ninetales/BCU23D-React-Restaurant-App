@@ -1,36 +1,10 @@
-import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import {
-  getBooking,
-  getBookings,
-  removeBooking,
-  getBookingCount,
-} from "../Blockchain-Service";
-import { getRestaurantId } from '../utils/initRestaurant'
+import { Link } from 'react-router-dom';
+import { unixToTimeConverter } from '../utils/converter';
 
-const BookingList = ({ data }) => {
-  const [trigger, setTrigger] = useState(false);
-  const [bookings, setBookings] = useState([]);
-
-  useEffect(() => {
-  
-    const getAllBookings = async () => {
-      const restId = getRestaurantId();
-      const bookings = await getBookings(restId);
-      let newBookings = [];
-
-      for (const booking of bookings) {
-          const newBooking = await getBooking(parseInt(booking._hex, 16));
-          newBookings.push(newBooking);
-      }
-      setBookings(newBookings);
-    };
-    getAllBookings();
-  }, [trigger]);
-
+const BookingList = ({ data, deleteBooking }) => {
   return (
     <div className="booking-list">
-      <div className="booking-div bookings-header">
+      <div className="bookings-header">
         <p>Name</p>
         <p>Date</p>
         <p>Guests</p>
@@ -39,59 +13,42 @@ const BookingList = ({ data }) => {
         <p>Delete</p>
         <p>Update</p>
       </div>
-      {bookings.length > 0
-        ? bookings.map((booking, index) => {
-            if (parseInt(booking.id._hex) == "") return null;
-            return (
-              <div key={index} className="booking-div">
-                <p>{booking.name}</p>
-                <p>{booking.date}</p>
-                <p>{parseInt(booking.numberOfGuests._hex, 16)}</p>
-                <p>{parseInt(booking.time._hex, 16)}</p>
-                <p>{parseInt(booking.id._hex, 16)}</p>
-                <button
-                  id="delete-btn"
-                  onClick={async () => {
-                    const res = await removeBooking(
-                      parseInt(booking.id._hex, 16)
-                    );
-                    setTrigger(!trigger);
-                  }}
-                >
-                  Delete
-                </button>
-                <Link to={`/admin/${parseInt(booking.id._hex, 16)}`}>
-                  Edit Booking
-                </Link>
-              </div>
-            );
-          })
-        : data.map((booking, index) => {
-            if (parseInt(booking.id._hex) == "") return null;
-            return (
-              <div key={index} className="booking-div">
-                <p>{booking.name}</p>
-                <p>{booking.date}</p>
-                <p>{parseInt(booking.numberOfGuests._hex, 16)}</p>
-                <p>{parseInt(booking.time._hex, 16)}</p>
-                <p>{parseInt(booking.id._hex, 16)}</p>
-                <button
-                  id="delete-btn"
-                  onClick={async () => {
-                    const res = await removeBooking(
-                      parseInt(booking.id._hex, 16)
-                    );
-                    setTrigger(!trigger);
-                  }}
-                >
-                  Delete
-                </button>
-                <Link to={`/admin/${parseInt(booking.id._hex, 16)}`}>
-                  Edit Booking
-                </Link>
-              </div>
-            );
-          })}
+      {data.length > 0 ? (
+        data.map((booking, index) => {
+          if (parseInt(booking.id._hex) == '') return null;
+          return (
+            <div key={index} className="booking-div booking-columns">
+              <span className="booking-columns__name">{booking.name}</span>
+              <span className="booking-columns__date">{booking.date}</span>
+              <span className="booking-columns__guests">
+                {parseInt(booking.numberOfGuests._hex, 16)}
+              </span>
+              <span className="booking-columns__time">
+                {unixToTimeConverter(booking.time)}
+              </span>
+              <span className="booking-columns__id">
+                {parseInt(booking.id._hex, 16)}
+              </span>
+              <button
+                className="delete-btn"
+                onClick={async () => {
+                  deleteBooking(parseInt(booking.id._hex, 16));
+                }}
+              >
+                Delete
+              </button>
+              <Link
+                to={`/admin/${parseInt(booking.id._hex, 16)}`}
+                className="edit-btn action-button"
+              >
+                Edit Booking
+              </Link>
+            </div>
+          );
+        })
+      ) : (
+        <span className="notice notice--info">No bookings to show...</span>
+      )}
     </div>
   );
 };

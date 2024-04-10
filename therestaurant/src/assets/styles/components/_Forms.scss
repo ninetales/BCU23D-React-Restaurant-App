@@ -1,0 +1,27 @@
+@use '../abstract/colors';
+
+
+
+input,
+textarea {
+    border: 1px solid colors.$inputBorderColor;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+    height: 40px;
+    padding: 0 10px;
+}
+
+textarea {
+    min-height: 100px;
+    resize: none;
+}
+
+button {
+    height: 60px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}

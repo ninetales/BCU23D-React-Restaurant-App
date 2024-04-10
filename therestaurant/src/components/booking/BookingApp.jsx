@@ -165,7 +165,11 @@ export const BookingApp = ({ updateBooking }) => {
           const parentElement = inputElement.parentNode;
 
           const messageElement = document.createElement('span');
-          messageElement.classList.add('input-message');
+          messageElement.classList.add(
+            'input-message',
+            'notice',
+            'notice--error'
+          );
           messageElement.textContent = 'This field cannot be empty';
 
           parentElement.insertBefore(messageElement, inputElement.nextSibling);
@@ -199,7 +203,7 @@ export const BookingApp = ({ updateBooking }) => {
   };
 
   return (
-    <div className='booking-app'>
+    <div className="booking-app">
       {updateBooking ? (
         <h3>
           Change booking with id{' '}
@@ -208,35 +212,28 @@ export const BookingApp = ({ updateBooking }) => {
       ) : (
         <h3>Make a reservation</h3>
       )}
-      <form
-        action=''
-        className='booking-form'
-        ref={formRef}
-      >
-        <div className='booking-form__people'>
+      <form action="" className="booking-form" ref={formRef}>
+        <div className="booking-form__people">
           <label>
             <span>Amount of people</span>
             <select
-              name='numberOfGuests'
-              id=''
+              name="numberOfGuests"
+              id=""
               required
               onChange={handleInputChange}
               defaultValue={
                 updateBooking ? (updateBooking.numberOfGuests ? '4' : '0') : '0'
               }
             >
-              <option
-                value='0'
-                disabled
-              >
+              <option value="0" disabled>
                 Select amount
               </option>
-              <option value='1'>1</option>
-              <option value='2'>2</option>
-              <option value='3'>3</option>
-              <option value='4'>4</option>
-              <option value='5'>5</option>
-              <option value='6'>6</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
             </select>
           </label>
         </div>
@@ -245,22 +242,22 @@ export const BookingApp = ({ updateBooking }) => {
           <>
             <CalendarApp checkAvailability={checkAvailability} />
 
-            <div className='booking-form__tables'>
+            <div className="booking-form__tables">
               <h3>Date selected: {formData.date}</h3>
               <span>Select time:</span>
               {bookedTables.get('tables')[18] === 15 &&
                 bookedTables.get('tables')[21] === 15 && (
-                  <div className='notice notice--warning'>
+                  <div className="notice notice--warning">
                     <span>No available tables</span>
                   </div>
                 )}
-              <div className='booking-form__time'>
+              <div className="booking-form__time">
                 {bookedTables.get('tables')[18] < 15 &&
                   stillBookable(timeToUnixConverter(18, 0)) && (
                     <label>
                       <input
-                        type='radio'
-                        name='time'
+                        type="radio"
+                        name="time"
                         value={timeToUnixConverter(18, 0)}
                         onChange={handleInputChange}
                         checked={
@@ -275,8 +272,8 @@ export const BookingApp = ({ updateBooking }) => {
                   stillBookable(timeToUnixConverter(21, 0)) && (
                     <label>
                       <input
-                        type='radio'
-                        name='time'
+                        type="radio"
+                        name="time"
                         value={timeToUnixConverter(21, 0)}
                         onChange={handleInputChange}
                         checked={
@@ -293,12 +290,12 @@ export const BookingApp = ({ updateBooking }) => {
         )}
 
         {formData.time && (
-          <div className='booking-form__contact-details'>
+          <div className="booking-form__contact-details">
             <label>
               <span>Name</span>
               <input
-                type='text'
-                name='name'
+                type="text"
+                name="name"
                 value={formData.name}
                 required
                 onChange={handleInputChange}
@@ -307,8 +304,8 @@ export const BookingApp = ({ updateBooking }) => {
             <label>
               <span>Email</span>
               <input
-                type='email'
-                name='email'
+                type="email"
+                name="email"
                 required
                 onChange={handleInputChange}
               />
@@ -316,16 +313,16 @@ export const BookingApp = ({ updateBooking }) => {
             <label>
               <span>Phone</span>
               <input
-                type='text'
-                name='phone'
+                type="text"
+                name="phone"
                 required
                 onChange={handleInputChange}
               />
             </label>
 
-            <div className='booking-form__action-con'>
+            <div className="booking-form__action-con">
               <button
-                className='save'
+                className="save action-button"
                 onClick={(e) => {
                   e.preventDefault();
                   submitHandler();
@@ -342,7 +339,7 @@ export const BookingApp = ({ updateBooking }) => {
               </button>
             </div>
 
-            <div className='policy-info'>
+            <div className="policy-info">
               <p>
                 By submitting this form, you consent to the processing of your
                 personal data in accordance with our Privacy Policy and GDPR

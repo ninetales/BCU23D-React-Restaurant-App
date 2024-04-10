@@ -1,4 +1,4 @@
-export const adress = '0x4E9649f2F453e1f34eF7215bD4F68831e1E1860E';
+export const adress = '0x3895253BA46CF0d4d6B263b3870D12321c1A03a3';
 export const url = 'HTTP://127.0.0.1:7545';
 export const abi = [
   {

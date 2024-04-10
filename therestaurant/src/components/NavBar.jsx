@@ -7,7 +7,7 @@ export const NavBar = () => {
   const { isAdmin } = useContext(AdminContext);
   return (
     <>
-      <nav className='navBar'>
+      <nav className="navBar">
         <ul>
           <li>
             <NavLink to={'/'}>Home</NavLink>

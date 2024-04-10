@@ -69,10 +69,11 @@ async function createBooking(numberOfGuests, name, date, time, restaurantId) {
 async function removeBooking(id) {
   try {
     const tx = await contract.removeBooking(id);
-    await tx.wait();
-    console.log('Booking with id ', id, ' has been removed.');
+    const receipt = await tx.wait();
+    return receipt.events[0].args[0]
   } catch (error) {
     console.error('Could not remove booking: ', error);
+    return null;
   }
 }
 

@@ -4,6 +4,7 @@ import './assets/styles/style.css';
 import { AdminContext } from './contexts/AdminContext';
 import { useState, createContext } from 'react';
 import './utils/initRestaurant';
+import './lib/sidebarHandler';
 
 export const MyContext = createContext('Nu failar det');
 
