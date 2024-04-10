@@ -112,17 +112,6 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
 
-            button {
-                height: 60px;
-                padding: 0;
-                border: none;
-                cursor: pointer;
-
-                &.save {
-                    background-color: #008cff;
-                    color: #fff;
-                }
-            }
         }
 
     }

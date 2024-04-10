@@ -2,7 +2,7 @@
 
 .notice {
     border: 1px solid;
-    padding: 20px;
+    padding: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,6 +11,12 @@
         border-color: colors.$noticeWarningBorderColor;
         background-color: colors.$noticeWarningBackgroundColor;
         color: colors.$noticeWarningTextColor;
+    }
+
+    &--error {
+        border-color: colors.$noticeErrorBorderColor;
+        background-color: colors.$noticeErrorBackgroundColor;
+        color: colors.$noticeErrorTextColor;
     }
 
 }

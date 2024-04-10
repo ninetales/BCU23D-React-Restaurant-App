@@ -39,11 +39,13 @@ const ContactForm = () => {
       messageArray.push('Message needs to be at least 10 characters');
 
     const errorDiv = (
-      <div>
+      <>
         {messageArray.map((mess, index) => (
-          <span key={index}>{mess}</span>
+          <span key={index} className="notice notice--error">
+            {mess}
+          </span>
         ))}
-      </div>
+      </>
     );
 
     setisValid(!messageArray.length);
@@ -54,51 +56,65 @@ const ContactForm = () => {
     return 'Thank you for your message! We will get back to you as soon as possible.';
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <span
-          id='contactFormError'
-          className={isValid ? 'hide' : ''}
-        >
+      <form onSubmit={handleSubmit} className="contact-form">
+        <div id="contactFormError" className={isValid ? 'hide' : ''}>
           {errorMessage}
-        </span>
-        <label htmlFor='firstName'>First name</label>
-        <input
-          id='firstName'
-          name='firstName'
-          value={firstNameInput}
-          onChange={(e) => setfirstNameInput(e.target.value)}
-        />
-        <label htmlFor='lastName'>Last name</label>
-        <input
-          id='lastName'
-          name='lastName'
-          value={lastNameInput}
-          onChange={(e) => setlastNameInput(e.target.value)}
-        />
-        <label htmlFor='email'>E-Mail</label>
-        <input
-          type='email'
-          id='email'
-          name='email'
-          value={emailInput}
-          onChange={(e) => setemailInput(e.target.value)}
-        />
-        <label htmlFor='phone'>Phone Number</label>
-        <input
-          type='tel'
-          name='phone'
-          id='phone'
-          value={phoneInput}
-          onChange={(e) => setphoneInput(e.target.value)}
-        />
-        <label htmlFor='message'>Message</label>
-        <textarea
-          id='message'
-          name='message'
-          value={messageInput}
-          onChange={(e) => setmessageInput(e.target.value)}
-        ></textarea>
-        <button>Submit</button>
+        </div>
+        <label>
+          <span>First name</span>
+          <input
+            id="firstName"
+            name="firstName"
+            type="text"
+            value={firstNameInput}
+            onChange={(e) => setfirstNameInput(e.target.value)}
+          />
+        </label>
+
+        <label>
+          <span>Last name</span>
+          <input
+            id="lastName"
+            name="lastName"
+            type="text"
+            value={lastNameInput}
+            onChange={(e) => setlastNameInput(e.target.value)}
+          />
+        </label>
+
+        <label>
+          <span>E-Mail</span>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={emailInput}
+            onChange={(e) => setemailInput(e.target.value)}
+          />
+        </label>
+
+        <label>
+          <span>Phone Number</span>
+          <input
+            type="tel"
+            name="phone"
+            id="phone"
+            value={phoneInput}
+            onChange={(e) => setphoneInput(e.target.value)}
+          />
+        </label>
+
+        <label>
+          <span>Message</span>
+          <textarea
+            id="message"
+            name="message"
+            value={messageInput}
+            onChange={(e) => setmessageInput(e.target.value)}
+          ></textarea>
+        </label>
+
+        <button className="action-button">Submit</button>
       </form>
     </div>
   );

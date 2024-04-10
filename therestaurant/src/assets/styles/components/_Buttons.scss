@@ -1,0 +1,6 @@
+@use '../abstract/colors';
+
+.action-button {
+    background-color: colors.$primaryColor;
+    color: #fff;
+}
