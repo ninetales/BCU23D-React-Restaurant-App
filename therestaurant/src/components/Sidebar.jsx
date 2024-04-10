@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavBar } from './NavBar';
+import { NavBarMobile } from './NavBarMobile';
 
 export const Sidebar = () => {
   const closeSidebar = () => {
@@ -35,7 +35,7 @@ export const Sidebar = () => {
           ></path>
         </svg>
       </button>
-      <NavBar closeSidebar={closeSidebar} />
+      <NavBarMobile closeSidebar={closeSidebar} />
     </aside>
   );
 };

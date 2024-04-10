@@ -3,52 +3,24 @@ import ToggleAdmin from '../components/ToggleAdmin';
 import { AdminContext } from '../contexts/AdminContext';
 import { useContext } from 'react';
 
-export const NavBar = ({ closeSidebar }) => {
+export const NavBar = () => {
   const { isAdmin } = useContext(AdminContext);
   return (
     <>
       <nav className="navBar">
         <ul>
           <li>
-            <NavLink
-              to={'/'}
-              onClick={() => {
-                closeSidebar();
-              }}
-            >
-              Home
-            </NavLink>
+            <NavLink to={'/'}>Home</NavLink>
           </li>
           <li>
-            <NavLink
-              to={'/booking'}
-              onClick={() => {
-                closeSidebar();
-              }}
-            >
-              Booking
-            </NavLink>
+            <NavLink to={'/booking'}>Booking</NavLink>
           </li>
           <li>
-            <NavLink
-              to={'/contact'}
-              onClick={() => {
-                closeSidebar();
-              }}
-            >
-              Contact
-            </NavLink>
+            <NavLink to={'/contact'}>Contact</NavLink>
           </li>
           {isAdmin ? (
             <li>
-              <NavLink
-                to={'/admin'}
-                onClick={() => {
-                  closeSidebar();
-                }}
-              >
-                Admin
-              </NavLink>
+              <NavLink to={'/admin'}>Admin</NavLink>
             </li>
           ) : (
             false
