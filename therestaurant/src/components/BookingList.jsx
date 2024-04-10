@@ -2,29 +2,30 @@ import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import {
   getBooking,
+  getBookings,
   removeBooking,
   getBookingCount,
 } from "../Blockchain-Service";
+import { getRestaurantId } from '../utils/initRestaurant'
 
 const BookingList = ({ data }) => {
   const [trigger, setTrigger] = useState(false);
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    const updateData = async () => {
-      try {
-        let newBookings = [];
-        const count = await getBookingCount();
-        const decimal = parseInt(count._hex);
-        for (let i = 1; i < decimal + 1; i++) {
-          newBookings.push(await getBooking(i));
-        }
-        setBookings(newBookings);
-      } catch (error) {
-        console.error("Error fetching bookings", error);
+  
+    const getAllBookings = async () => {
+      const restId = getRestaurantId();
+      const bookings = await getBookings(restId);
+      let newBookings = [];
+
+      for (const booking of bookings) {
+          const newBooking = await getBooking(parseInt(booking._hex, 16));
+          newBookings.push(newBooking);
       }
+      setBookings(newBookings);
     };
-    updateData();
+    getAllBookings();
   }, [trigger]);
 
   return (
