@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import ToggleAdmin from '../components/ToggleAdmin';
 import { AdminContext } from '../contexts/AdminContext';
@@ -6,10 +5,9 @@ import { useContext } from 'react';
 
 export const NavBar = () => {
   const { isAdmin } = useContext(AdminContext);
-  console.log(isAdmin);
   return (
     <>
-      <nav className="navBar">
+      <nav className='navBar'>
         <ul>
           <li>
             <NavLink to={'/'}>Home</NavLink>
