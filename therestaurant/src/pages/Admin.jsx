@@ -13,6 +13,7 @@ const Admin = () => {
 
   useEffect(() => {
     setTimeout(getAllBookings, 2000); // Just to show the animation
+    // getAllBookings();
   }, []);
 
   const getAllBookings = async () => {

@@ -16,3 +16,11 @@ h5,
 h6 {
     color: colors.$titleColor;
 }
+
+p,
+span,
+input,
+button,
+a {
+    font-size: pxToRem(15);
+}

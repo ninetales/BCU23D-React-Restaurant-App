@@ -1,4 +1,5 @@
 @use '../abstract/colors';
+@use '../abstract/variables';
 
 .booking-list {
 
@@ -6,16 +7,23 @@
     font-weight: bold;
     color: colors.$titleColor;
     background-color: #f8fbff;
+    padding: 1em;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
   }
 
   .booking-div {
-    border-bottom: 1px solid colors.$titleColor;
+    border-bottom: 1px solid colors.$formBorderColor;
     padding: 1em;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 5px;
+    position: relative;
 
-    .delete-btn {}
+    .delete-btn {
+      background-color: colors.$deleteBackgroundColor;
+      color: colors.$deletePrimaryColor;
+    }
 
     .edit-btn {
       display: flex;
@@ -25,5 +33,95 @@
     }
   }
 
+  .booking-columns {
+    span {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
 
+    a.action-button {
+      height: 60px;
+    }
+  }
+
+}
+
+@media screen and (max-width: variables.$pageWidthTablet) {
+  .booking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .bookings-header {
+      display: none;
+    }
+
+    .booking-div {
+      display: flex;
+      flex-direction: column;
+      background-color: colors.$formBackgroundColor;
+      border: 1px solid colors.$formBorderColor;
+      gap: 0;
+
+      &::before {
+        content: 'Booking info:';
+        display: block;
+        background-color: colors.$formBackgroundColorContrast;
+        border: 1px solid colors.$formBorderColor;
+        padding: 8px;
+        right: 0;
+        text-align: center;
+      }
+    }
+
+    .booking-columns {
+
+      span {
+        display: flex;
+        align-items: center;
+        height: 50px;
+      }
+
+      span+span {
+        border-top: 1px solid #eee;
+      }
+
+      &__name::before,
+      &__date::before,
+      &__guests::before,
+      &__time::before,
+      &__id::before {
+        position: relative;
+        margin-right: 5px;
+        font-weight: bold;
+      }
+
+      &__name::before {
+        content: 'Name:';
+      }
+
+      &__date::before {
+        content: 'Date:';
+      }
+
+      &__guests::before {
+        content: 'Guests:';
+      }
+
+      &__time::before {
+        content: 'Time:';
+      }
+
+      &__id::before {
+        content: 'ID:';
+      }
+
+      &__name::before {
+        content: 'Name:';
+      }
+
+    }
+
+  }
 }

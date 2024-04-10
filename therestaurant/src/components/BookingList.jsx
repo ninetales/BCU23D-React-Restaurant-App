@@ -4,7 +4,7 @@ import { unixToTimeConverter } from '../utils/converter';
 const BookingList = ({ data, deleteBooking }) => {
   return (
     <div className="booking-list">
-      <div className="booking-div bookings-header">
+      <div className="bookings-header">
         <p>Name</p>
         <p>Date</p>
         <p>Guests</p>
@@ -17,12 +17,18 @@ const BookingList = ({ data, deleteBooking }) => {
         data.map((booking, index) => {
           if (parseInt(booking.id._hex) == '') return null;
           return (
-            <div key={index} className="booking-div">
-              <p>{booking.name}</p>
-              <p>{booking.date}</p>
-              <p>{parseInt(booking.numberOfGuests._hex, 16)}</p>
-              <p>{unixToTimeConverter(booking.time)}</p>
-              <p>{parseInt(booking.id._hex, 16)}</p>
+            <div key={index} className="booking-div booking-columns">
+              <span className="booking-columns__name">{booking.name}</span>
+              <span className="booking-columns__date">{booking.date}</span>
+              <span className="booking-columns__guests">
+                {parseInt(booking.numberOfGuests._hex, 16)}
+              </span>
+              <span className="booking-columns__time">
+                {unixToTimeConverter(booking.time)}
+              </span>
+              <span className="booking-columns__id">
+                {parseInt(booking.id._hex, 16)}
+              </span>
               <button
                 className="delete-btn"
                 onClick={async () => {
