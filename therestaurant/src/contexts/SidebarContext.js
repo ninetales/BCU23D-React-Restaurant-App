@@ -1,3 +1,8 @@
-import { createContext } from 'react';
+import { createContext, useState } from 'react';
 
-export const SidebarContext = createContext(false);
+const initialState = {
+    sidebarStatus: false,
+    toggleSidebar: () => { },
+};
+
+export const SidebarContext = createContext(initialState);

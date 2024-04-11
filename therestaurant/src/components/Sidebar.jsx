@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { NavBarMobile } from './NavBarMobile';
+import { SidebarContext } from '../contexts/SidebarContext';
 
 export const Sidebar = () => {
-  const closeSidebar = () => {
-    const sidebar = document.querySelector('#sidebar');
-    if (sidebar.classList.contains('toggled')) {
-      sidebar.classList.remove('toggled');
-    }
-  };
+  const { sidebarStatus, toggleSidebar } = useContext(SidebarContext);
 
   return (
-    <aside className="sidebar" id="sidebar">
+    <aside className={`sidebar ${sidebarStatus ? 'toggled' : ''}`} id="sidebar">
       <button
         id="mobile-nav-btn-close"
         onClick={() => {
-          closeSidebar();
+          toggleSidebar();
         }}
       >
         <svg
@@ -35,7 +31,7 @@ export const Sidebar = () => {
           ></path>
         </svg>
       </button>
-      <NavBarMobile closeSidebar={closeSidebar} />
+      <NavBarMobile />
     </aside>
   );
 };

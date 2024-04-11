@@ -2,8 +2,10 @@ import { NavLink } from 'react-router-dom';
 import ToggleAdmin from '../components/ToggleAdmin';
 import { AdminContext } from '../contexts/AdminContext';
 import { useContext } from 'react';
+import { SidebarContext } from '../contexts/SidebarContext';
 
 export const NavBarMobile = ({ closeSidebar }) => {
+  const { sidebarStatus, toggleSidebar } = useContext(SidebarContext);
   const { isAdmin } = useContext(AdminContext);
   return (
     <>
@@ -13,7 +15,7 @@ export const NavBarMobile = ({ closeSidebar }) => {
             <NavLink
               to={'/'}
               onClick={() => {
-                closeSidebar();
+                toggleSidebar();
               }}
             >
               Home
@@ -23,7 +25,7 @@ export const NavBarMobile = ({ closeSidebar }) => {
             <NavLink
               to={'/booking'}
               onClick={() => {
-                closeSidebar();
+                toggleSidebar();
               }}
             >
               Booking
@@ -33,7 +35,7 @@ export const NavBarMobile = ({ closeSidebar }) => {
             <NavLink
               to={'/contact'}
               onClick={() => {
-                closeSidebar();
+                toggleSidebar();
               }}
             >
               Contact
@@ -44,7 +46,7 @@ export const NavBarMobile = ({ closeSidebar }) => {
               <NavLink
                 to={'/admin'}
                 onClick={() => {
-                  closeSidebar();
+                  toggleSidebar();
                 }}
               >
                 Admin

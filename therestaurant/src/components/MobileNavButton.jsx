@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { SidebarContext } from '../contexts/SidebarContext';
 
 export const MobileNavButton = () => {
-  const { isSidebarOpen, toggleSidebar } = useContext(SidebarContext);
+  const { sidebarStatus, toggleSidebar } = useContext(SidebarContext);
   return (
     <button
       id="mobile-nav-btn"
